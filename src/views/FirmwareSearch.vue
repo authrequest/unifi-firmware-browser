@@ -1,6 +1,5 @@
 <template>
   <div class="gr-4 d-flex flex-column">
-    <h1>UniFi Firmware Search</h1>
     <!-- Filters Toolbar -->
     <v-card>
       <v-card-text>

@@ -20,17 +20,17 @@
             <p class="mb-3">
               This is an independent, community-created firmware browser that
               uses publicly available UniFi firmware data. It is not affiliated
-              with, endorsed by, or supported by Ubiquiti Inc.
-            </p>
-            <p class="mb-3">
-              While the firmware data comes from official UniFi sources, this
-              tool is provided as-is for convenience. Always verify firmware
+              with, endorsed by, or supported by Ubiquiti Inc. While the
+              firmware data comes from official UniFi sources, this tool is
+              provided as-is for convenience. Always verify firmware
               compatibility and backup your devices before updating.
             </p>
             <v-alert type="warning" variant="tonal" class="mt-3">
               <strong>Use at your own risk:</strong> This tool is not officially
               supported by Ubiquiti. For official support and firmware updates,
-              please visit the official UniFi channels.
+              use the existing auto-update mechanisms in Unifi OS. You only have
+              yourself to blame if you break your device by installing incorrect
+              or unsupported firmware.
             </v-alert>
           </v-card-text>
         </v-card>
@@ -152,6 +152,32 @@
               After downloading firmware from this site, you'll need to upload
               it to your devices.
             </p>
+
+            <h4 class="text-h6 mb-3">
+              <v-icon class="mr-2">mdi-update</v-icon>
+              Disable Auto-Updates (<strong>Important</strong>)
+            </h4>
+            <v-alert type="info" variant="tonal" class="mb-4">
+              <strong>Important First Step:</strong> Disable auto-updates to
+              prevent your device from automatically reverting to official
+              firmware after manual installation.
+            </v-alert>
+            <ol class="mb-4">
+              <li class="mb-2">
+                <strong>Navigate to Settings:</strong> In your UniFi Controller,
+                go to <strong>Settings > Control Plane > Updates</strong>.
+              </li>
+              <li class="mb-2">
+                <strong>Select the relevant application:</strong> Click on the
+                application that manages your device (<strong>Network</strong>,
+                <strong>Protect</strong>, <strong>Access</strong>, etc.).
+              </li>
+              <li class="mb-2">
+                <strong>Disable auto-updates:</strong> Uncheck
+                <strong>"Device Auto-Update"</strong> (and optionally
+                <strong>"Application Auto-Update"</strong> as well).
+              </li>
+            </ol>
 
             <v-divider class="mb-4"></v-divider>
 

@@ -49,7 +49,7 @@
                         prepend-icon="mdi-help"
                         size="x-small"
                         color="primary"
-                        :to="{ name: 'faq' }"
+                        :to="{ name: 'faq', hash: '#platform-detection' }"
                         class="ml-1"
                       >
                         What's this?
