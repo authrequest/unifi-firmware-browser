@@ -60,11 +60,11 @@
                     }}</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item
-                    v-if="knownProducts"
+                    v-if="knownModels"
                     prepend-icon="mdi-devices"
                     :lines="false"
-                    title="Known Models"
-                    :subtitle="knownProducts.join(', ')"
+                    title="Possible Models"
+                    :subtitle="knownModels.join(', ')"
                   />
                   <v-list-item
                     prepend-icon="mdi-source-branch"
@@ -130,10 +130,20 @@
               :href="firmwareService.getDownloadUrl(firmware.state.value)"
               tag="a"
               block
-              class="mb-4"
+              class="mb-2"
             >
               Download Firmware
             </v-btn>
+
+            <div class="text-center mb-4">
+              <a
+                :href="firmwareService.getDownloadUrl(firmware.state.value)"
+                target="_blank"
+                class="text-caption text-decoration-none"
+              >
+                {{ firmwareService.getDownloadUrl(firmware.state.value) }}
+              </a>
+            </div>
 
             <v-alert type="info" variant="tonal">
               <strong>Important:</strong> Always backup your device before
@@ -150,10 +160,8 @@
 import { onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useAsyncState } from "@vueuse/core";
-import firmwareService, {
-  type FirmwareItem,
-  PLATFORM_PRODUCTS,
-} from "@/firmwareService";
+import firmwareService, { type FirmwareItem } from "@/firmwareService";
+import { platformModels } from "@/platformModels";
 import {
   formatFileSize,
   formatDate,
@@ -162,10 +170,10 @@ import {
 
 const route = useRoute();
 
-const knownProducts = computed(() => {
+const knownModels = computed(() => {
   if (!firmware.state.value) return null;
-  const products = PLATFORM_PRODUCTS[firmware.state.value.platform];
-  return products && products.length > 0 ? products : null;
+  const models = platformModels[firmware.state.value.platform];
+  return models && models.length > 0 ? models : null;
 });
 
 const firmware = useAsyncState(

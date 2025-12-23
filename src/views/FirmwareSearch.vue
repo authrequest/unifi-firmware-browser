@@ -108,16 +108,18 @@
                 :items-per-page="100"
                 :sort-by="sortBy ? [{ key: sortBy, order: sortOrder }] : []"
                 @update:sort-by="handleSort"
+                @click:row="handleRowClick"
                 item-key="id"
                 hover
                 density="compact"
+                class="clickable-rows"
               >
                 <template #item.product="{ item }">
                   <v-chip
                     color="primary"
                     variant="outlined"
                     size="small"
-                    @click="toggleFilter('product', item.product)"
+                    @click.stop="toggleFilter('product', item.product)"
                     class="cursor-pointer"
                     :title="'Filter by product: ' + item.product"
                   >
@@ -130,7 +132,7 @@
                     color="purple"
                     variant="outlined"
                     size="small"
-                    @click="toggleFilter('platform', item.platform)"
+                    @click.stop="toggleFilter('platform', item.platform)"
                     class="cursor-pointer"
                     :title="'Filter by platform: ' + item.platform"
                   >
@@ -202,6 +204,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import firmwareService, { type FirmwareItem } from "@/firmwareService";
 import {
   formatFileSize,
@@ -212,6 +215,8 @@ import { useRouteQuery } from "@vueuse/router";
 import { useAsyncState, useDebounceFn } from "@vueuse/core";
 import type { DataTableHeader } from "vuetify";
 import FirmwareFilters from "@/components/FirmwareFilters.vue";
+
+const router = useRouter();
 
 // Filters ref for calling toggleFilter from table
 const filtersRef = ref<InstanceType<typeof FirmwareFilters> | null>(null);
@@ -379,4 +384,15 @@ onMounted(async () => {
   await filterOptions.execute();
   await firmware.execute();
 });
+
+// Handle row click to navigate to details
+const handleRowClick = (_event: any, { item }: { item: FirmwareItem }) => {
+  router.push(`/firmware/${item.id}`);
+};
 </script>
+
+<style scoped>
+.clickable-rows :deep(tbody tr) {
+  cursor: pointer;
+}
+</style>

@@ -60,7 +60,7 @@ const hasAcceptedEula = useLocalStorage("disclaimer-agreed", false);
 
 .v-application code {
   background-color: rgb(var(--v-theme-surface-variant));
-  color: rgb(var(--v-theme-on-surface-variant));
+  color: white;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",

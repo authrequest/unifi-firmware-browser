@@ -19,7 +19,7 @@
         prepend-icon="mdi-filter-remove"
         size="small"
         title="Clear all filters"
-        text="Clear"
+        text="Clear Filters"
       />
     </v-card-title>
 
@@ -135,7 +135,7 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive } from "vue";
-import { PLATFORM_PRODUCTS } from "../firmwareService";
+import { platformModels } from "@/platformModels";
 import { getChannelDisplayName } from "@/formatters";
 import { useDisplay } from "vuetify";
 
@@ -191,7 +191,7 @@ const filterConfigs: FilterConfig[] = [
     searchable: true,
     items: () =>
       props.platforms.map((platform) => {
-        const products = PLATFORM_PRODUCTS[platform] || [];
+        const products = platformModels[platform] || [];
         const subtitle = products.length > 0 ? products.join(", ") : undefined;
         return { title: platform, value: platform, subtitle };
       }),
